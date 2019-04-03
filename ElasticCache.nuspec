@@ -21,10 +21,7 @@
     </dependencies>
   </metadata>
   <files>
-	<file src="ElasticCache\bin\$configuration$\netstandard1.3\ElasticCache.dll" target="lib\netstandard1.3\ElasticCache.dll" />
-	<file src="ElasticCache\bin\$configuration$\netstandard1.4\ElasticCache.dll" target="lib\netstandard1.4\ElasticCache.dll" />
-	<file src="ElasticCache\bin\$configuration$\netstandard1.5\ElasticCache.dll" target="lib\netstandard1.5\ElasticCache.dll" />
-	<file src="ElasticCache\bin\$configuration$\netstandard1.6\ElasticCache.dll" target="lib\netstandard1.6\ElasticCache.dll" />
 	<file src="ElasticCache\bin\$configuration$\netstandard2.0\ElasticCache.dll" target="lib\netstandard2.0\ElasticCache.dll" />
+	<file src="ElasticCache.StrongName\bin\$configuration$\netstandard2.0\ElasticCache.StrongName.dll" target="lib\netstandard2.0\ElasticCache.StrongName.dll" />
   </files>
 </package>
