@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Dynu.API</id>
+    <version>$version$</version>
+    <title>ElasticCache</title>
+    <authors>Telly Brown</authors>
+    <owners>Telly Brown</owners>
+    <licenseUrl>https://github.com/tellybrown/ElasticCache/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/tellybrown/ElasticCache</projectUrl>
+    <iconUrl>https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blte52beceb9300987e/5c1934b86863b0a60b2db098/icon-white-circle-elastic-search.svg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description></description>
+    <releaseNotes></releaseNotes>
+    <tags>ElasticSearch Cache IDistributedCache Caching</tags>
+    <dependencies>
+      <dependency id="Microsoft.Extensions.Caching.Abstractions" version="2.2.0"/>
+      <dependency id="Microsoft.Extensions.DependencyInjection" version="2.2.0"/>
+      <dependency id="Microsoft.Extensions.Options" version="2.2.0"/>
+      <dependency id="NEST" version="6.6.0"/>
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="ElasticCache\bin\$configuration$\netstandard1.3\ElasticCache.dll" target="lib\netstandard1.3\ElasticCache.dll" />
+	<file src="ElasticCache\bin\$configuration$\netstandard1.4\ElasticCache.dll" target="lib\netstandard1.4\ElasticCache.dll" />
+	<file src="ElasticCache\bin\$configuration$\netstandard1.5\ElasticCache.dll" target="lib\netstandard1.5\ElasticCache.dll" />
+	<file src="ElasticCache\bin\$configuration$\netstandard1.6\ElasticCache.dll" target="lib\netstandard1.6\ElasticCache.dll" />
+	<file src="ElasticCache\bin\$configuration$\netstandard2.0\ElasticCache.dll" target="lib\netstandard2.0\ElasticCache.dll" />
+  </files>
+</package>
