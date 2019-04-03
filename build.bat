@@ -12,5 +12,5 @@ if not "%PackageVersion%" == "" (
 
 mkdir Build
 dotnet build ElasticCache.sln -c %config%
-dotnet pack ElasticCache.StrongName\ElasticCache.StrongName.csproj -p:PackageVersion=%version% -o .\..\Build /p:NuspecFile=.\..\ElasticCache.StrongName.nuspec
-dotnet pack ElasticCache\ElasticCache.csproj -p:PackageVersion=%version% -o .\..\Build /p:NuspecFile=.\..\ElasticCache.nuspec
+dotnet pack ElasticCache.StrongName\ElasticCache.StrongName.csproj /p:PackageVersion=%version% -o .\..\Build
+dotnet pack ElasticCache\ElasticCache.csproj /p:PackageVersion=%version% -o .\..\Build
