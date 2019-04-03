@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Dynu.API</id>
+    <id>ElasticCache</id>
     <version>$version$</version>
     <title>ElasticCache</title>
     <authors>Telly Brown</authors>
