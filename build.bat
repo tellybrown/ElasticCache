@@ -10,5 +10,7 @@ if not "%PackageVersion%" == "" (
    set version=%PackageVersion%
 )
 
-
+mkdir Build
 dotnet build ElasticCache.sln -c %config%
+dotnet pack ElasticCache.StrongName\ElasticCache.StrongName.csproj /p:PackageVersion=%version% -o .\..\Build
+dotnet pack ElasticCache\ElasticCache.csproj /p:PackageVersion=%version% -o .\..\Build
