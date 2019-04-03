@@ -39,7 +39,7 @@ namespace ElasticCache
         /// if `wait_for` then wait for a refresh to make this operation visible to search, 
         /// if `false` (the default) then do nothing with refreshes.
         /// </summary>
-        public Refresh Refresh { get; set; }
+        public Refresh Refresh { get; set; } = Refresh.False;
 
         ElasticCacheOptions IOptions<ElasticCacheOptions>.Value
         {

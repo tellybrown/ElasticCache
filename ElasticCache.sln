@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticCache", "ElasticCache\ElasticCache.csproj", "{2F2AD8DE-DBF4-4E56-9BA0-4BD786369B62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElasticCache", "ElasticCache\ElasticCache.csproj", "{2F2AD8DE-DBF4-4E56-9BA0-4BD786369B62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticCache.Test", "ElasticCache.Test\ElasticCache.Test.csproj", "{B52938E7-B93F-423B-B93A-963DE64EA0E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElasticCache.Test", "ElasticCache.Test\ElasticCache.Test.csproj", "{B52938E7-B93F-423B-B93A-963DE64EA0E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticCache.Example", "ElasticCache.Example\ElasticCache.Example.csproj", "{570A8728-6D84-4F35-B874-A22A9C6206BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B52938E7-B93F-423B-B93A-963DE64EA0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B52938E7-B93F-423B-B93A-963DE64EA0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B52938E7-B93F-423B-B93A-963DE64EA0E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{570A8728-6D84-4F35-B874-A22A9C6206BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570A8728-6D84-4F35-B874-A22A9C6206BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570A8728-6D84-4F35-B874-A22A9C6206BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570A8728-6D84-4F35-B874-A22A9C6206BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
