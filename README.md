@@ -3,6 +3,8 @@ An IDistributedCache implementation for Elastic Search
 
 Microsoft Provides an In-Memory Cache and a Sql Server Cache.  This library will store the cached data in Elastic Search.
 
+[![elasticcache MyGet Build Status](https://www.myget.org/BuildSource/Badge/elasticcache?identifier=cb4de5c1-4fec-4945-9403-a4928e81f636)](https://www.myget.org/)
+
 
 # Dependency Injection
 ```
