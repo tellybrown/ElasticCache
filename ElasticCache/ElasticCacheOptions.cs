@@ -29,6 +29,18 @@ namespace ElasticCache
         public string IndexName { get; set; }
 
         /// <summary>
+        /// Turn on/off Compression for cached data.
+        /// By default, its false
+        /// </summary>
+        public bool Compress { get; set; } = false;
+
+        /// <summary>
+        /// Minimum Size for compression to be turned on. 
+        /// By default, 2048 bytes
+        /// </summary>
+        public int MinLengthCompress { get; set; } = 2048;
+
+        /// <summary>
         /// The default sliding expiration set for a cache entry if neither Absolute or SlidingExpiration has been set explicitly.
         /// By default, its 20 minutes.
         /// </summary>

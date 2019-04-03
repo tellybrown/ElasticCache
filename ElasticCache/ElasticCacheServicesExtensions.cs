@@ -1,6 +1,10 @@
 ﻿using ElasticCache;
 using Microsoft.Extensions.Caching.Distributed;
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -24,6 +28,5 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return services;
         }
-
     }
 }

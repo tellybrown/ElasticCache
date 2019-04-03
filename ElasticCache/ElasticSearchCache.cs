@@ -4,6 +4,9 @@ using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Options;
 using Nest;
 using System;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,12 +24,17 @@ namespace ElasticCache
         private readonly TimeSpan _defaultSlidingExpiration;
         private readonly IElasticClient _client;
         private readonly Refresh _refresh;
+        private readonly bool _compress;
+        private readonly int _minLengthCompress;
+
 
         public ElasticSearchCache(IOptions<ElasticCacheOptions> options)
         {
             var optionsValue = options.Value;
 
             _refresh = optionsValue.Refresh;
+            _compress = optionsValue.Compress;
+            _minLengthCompress = optionsValue.MinLengthCompress;
 
             if (optionsValue.ConnectionSettings == null)
             {
@@ -58,7 +66,7 @@ namespace ElasticCache
             _deleteExpiredCachedItemsDelegate = DeleteExpiredCacheItems;
             _defaultSlidingExpiration = optionsValue.DefaultSlidingExpiration;
 
-            _client = new ElasticClient(optionsValue.ConnectionSettings);
+            _client = new ElasticClient(optionsValue.ConnectionSettings.DefaultMappingFor<CacheItem>(m => m.IndexName(optionsValue.IndexName)));
         }
 
 
@@ -68,7 +76,7 @@ namespace ElasticCache
 
             ScanForExpiredItemsIfRequired();
 
-            return cacheItem != null ? Convert.FromBase64String(cacheItem.Value) : null;
+            return cacheItem != null ? Decompress(cacheItem.Value) : null;
         }
 
         public async Task<byte[]> GetAsync(string key, CancellationToken token = default(CancellationToken))
@@ -84,7 +92,7 @@ namespace ElasticCache
 
             ScanForExpiredItemsIfRequired();
 
-            return cacheItem != null ? Convert.FromBase64String(cacheItem.Value) : null;
+            return cacheItem != null ? Decompress(cacheItem.Value) : null;
         }
 
         public void Refresh(string key)
@@ -242,13 +250,24 @@ namespace ElasticCache
             var cacheItem = new CacheItem()
             {
                 Id = key,
-                Value = Convert.ToBase64String(value),
+                Value = GetValue(value),
                 AbsoluteExpiration = absoluteExpiration,
                 SlidingExpirationInSeconds = options.SlidingExpiration,
                 ExpiresAtTime = GetExpireTime(options, utcNow, absoluteExpiration)
             };
             //UpdateExpireTime(cacheItem);
             return cacheItem;
+        }
+        private string GetValue(byte[] value)
+        {
+            if (_compress && value.Length >= _minLengthCompress)
+            {
+                return Compress(value);
+            }
+            else
+            {
+                return Convert.ToBase64String(value);
+            }
         }
         private DateTimeOffset GetExpireTime(DistributedCacheEntryOptions options, DateTimeOffset utcNow, DateTimeOffset? absoluteExpiration)
         {
@@ -276,7 +295,6 @@ namespace ElasticCache
                 }
             }
         }
-
         private void ValidateOptions(TimeSpan? slidingExpiration, DateTimeOffset? absoluteExpiration)
         {
             if (!slidingExpiration.HasValue && !absoluteExpiration.HasValue)
@@ -339,12 +357,56 @@ namespace ElasticCache
                 var expires = cacheItem.ExpiresAtTime;
                 UpdateExpireTime(cacheItem);
 
-                if(expires != cacheItem.ExpiresAtTime)
+                if (expires != cacheItem.ExpiresAtTime)
                 {
                     _client.Index<CacheItem>(cacheItem, i => i.Id(cacheItem.Id).Refresh(_refresh));
                 }
 
                 return cacheItem;
+            }
+        }
+        private readonly string _header = "[Compress]";
+        private string Compress(byte[] bytes)
+        {
+            using (var stream = new MemoryStream())
+            {
+                using (GZipStream compressionStream = new GZipStream(stream, CompressionMode.Compress))
+                {
+                    compressionStream.Write(bytes, 0, bytes.Length);
+                }
+
+                return _header + Convert.ToBase64String(stream.ToArray());
+            }
+        }
+        private byte[] Decompress(string value)
+        {
+            if (value.StartsWith(_header))
+            {
+                var bytes = Convert.FromBase64String(value.Substring(_header.Length));
+
+                using (var stream = new MemoryStream())
+                {
+                    stream.Write(bytes, 0, bytes.Length);
+                    stream.Position = 0;
+
+                    using (GZipStream compressionStream = new GZipStream(stream, CompressionMode.Decompress))
+                    {
+                        byte[] buffer = new byte[1024];
+                        int nRead;
+                        using (var outputStream = new MemoryStream())
+                        {
+                            while ((nRead = compressionStream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                outputStream.Write(buffer, 0, nRead);
+                            }
+                            return outputStream.ToArray();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return Convert.FromBase64String(value);
             }
         }
     }
