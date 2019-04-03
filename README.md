@@ -32,3 +32,7 @@ public class TestController
   }
 }
 ```
+
+
+# More Information
+[Microsoft IDistributedCache](https://docs.microsoft.com/en-us/aspnet/core/performance/caching/distributed?view=aspnetcore-2.2)
