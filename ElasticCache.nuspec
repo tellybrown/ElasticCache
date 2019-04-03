@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Dynu.API</id>
+    <id>ElasticCache</id>
     <version>$version$</version>
     <title>ElasticCache</title>
     <authors>Telly Brown</authors>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/tellybrown/ElasticCache</projectUrl>
     <iconUrl>https://images.contentstack.io/v3/assets/bltefdd0b53724fa2ce/blte52beceb9300987e/5c1934b86863b0a60b2db098/icon-white-circle-elastic-search.svg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description></description>
+    <description>An IDistributedCache implementation for Elastic Search</description>
     <releaseNotes></releaseNotes>
     <tags>ElasticSearch Cache IDistributedCache Caching</tags>
     <dependencies>
